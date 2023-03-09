@@ -3,6 +3,13 @@ uuid = "a88761f6-b58b-4a4a-a8c2-5b1acaebac37"
 authors = ["Ivan Abraham"]
 version = "1.0.0-DEV"
 
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Ellipses = "b9d4f3ba-3816-48fb-bf92-3f46c6368c52"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+
 [compat]
 julia = "1"
 
