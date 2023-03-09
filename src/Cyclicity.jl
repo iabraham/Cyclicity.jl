@@ -106,7 +106,7 @@ end
 export Scan
 
 function CyData(s::Scan, norm::Function, pnum::Integer) :: CyData
-    n, t, r = s.name. s.task, s.run
+    n, t, r = s.name, s.task, s.run
     lm = s.data |> (make_lead_matrix ∘ Matrix ∘ norm ∘ mean_center ∘ match_ends)
     evals, evecs = eigen(lm, sortby= λ -> -abs(λ))
     phase = evecs[:, pnum]
