@@ -76,10 +76,8 @@ struct CyData
 	lm :: Matrix{<:Number}
 	lambdas :: Vector{<:Number}
 	phases :: Matrix{<:Number}
-	phase_num :: Integer
-	perm :: Vector{Integer}
-	ellipse :: EllipseQform 
 end
+
 
 function parsename(name::AbstractString)
 	"""Expects name to be of the form `rfMRI_REST1_LR.csv`"""
@@ -105,14 +103,11 @@ function Scan(filename::String) :: Scan
 end
 export Scan
 
-function CyData(s::Scan, norm::Function, pnum::Integer) :: CyData
+function CyData(s::Scan, norm::Function) :: CyData
     n, t, r = s.name, s.task, s.run
     lm = s.data |> (make_lead_matrix ∘ Matrix ∘ norm ∘ mean_center ∘ match_ends)
     evals, evecs = eigen(lm, sortby= λ -> -abs(λ))
-    phase = evecs[:, pnum]
-    ell = fit_ellipse(phase)
-    perm = ell.func.(real(phase), imag(phase))
-    CyData(n, t, r, Symbol(norm), lm, evals, evecs, pnum, sortperm(perm), ell)
+    CyData(n, t, r, Symbol(norm), lm, evals, evecs)
 end
 
 export CyData
