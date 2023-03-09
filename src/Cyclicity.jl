@@ -78,6 +78,16 @@ struct CyData
 	phases :: Matrix{<:Number}
 end
 
+struct ElData
+	name :: String
+	task :: String
+	run :: String
+	norm :: Symbol
+	phase :: Vector{<:Number}
+	pnum :: Integer
+	ell :: EllipseQform
+end
+
 
 function parsename(name::AbstractString)
 	"""Expects name to be of the form `rfMRI_REST1_LR.csv`"""
@@ -109,7 +119,13 @@ function CyData(s::Scan, norm::Function) :: CyData
     evals, evecs = eigen(lm, sortby= λ -> -abs(λ))
     CyData(n, t, r, Symbol(norm), lm, evals, evecs)
 end
-
 export CyData
 
+
+function ElData(s::Scan, pnum::Integer) :: ElData
+	phase = s.phases[:, pnum]
+	qell = fit_ellipse(phase)
+	n, t, r, norm = s.name, s.task, s.run, s.norm
+	ElData(n, t, r, norm, phase, pnum, qell)
 end
+export ElData
