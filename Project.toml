@@ -1,0 +1,13 @@
+name = "Cyclicity"
+uuid = "a88761f6-b58b-4a4a-a8c2-5b1acaebac37"
+authors = ["Ivan Abraham"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
