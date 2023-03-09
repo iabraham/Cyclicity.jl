@@ -128,4 +128,6 @@ function ElData(s::Scan, pnum::Integer) :: ElData
 	n, t, r, norm = s.name, s.task, s.run, s.norm
 	ElData(n, t, r, norm, phase, pnum, qell)
 end
+
 export ElData
+end
