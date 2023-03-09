@@ -122,7 +122,7 @@ end
 export CyData
 
 
-function ElData(s::Scan, pnum::Integer) :: ElData
+function ElData(s::CyData, pnum::Integer) :: ElData
 	phase = s.phases[:, pnum]
 	qell = fit_ellipse(phase)
 	n, t, r, norm = s.name, s.task, s.run, s.norm
