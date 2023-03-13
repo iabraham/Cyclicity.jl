@@ -1,7 +1,7 @@
 # Cyclicity
 
 
-Package to help implement Cyclicity Analysis (see [^1], [^2], [^3]) in Julia. 
+Package to help implement Cyclicity Analysis[^1][^2][^3] in Julia. 
 
 [^1]: [bioRxiv](https://doi.org/10.1101/2021.05.16.444387)
 [^2]: [Frontiers in Computational
