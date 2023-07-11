@@ -1,49 +1,61 @@
 module Cyclicity
 
 using DataFrames, LinearAlgebra, StatsBase, CSV, Ellipses
-# Remove linear trend or DC bias
 
+# Remove linear trend or DC bias
+# ------------------------------------------------
+"""Subtract mean value of a vector from itself"""
 mean_center(vec::Vector{<:Number}) :: Vector = vec .- mean(vec)
+
 """Mean center columns of a data frame"""
 mean_center(df::DataFrame) :: DataFrame = mapcols(mean_center ∘ Array, df)
 
-"""Adjust dataframe columns to have same start and end values"""
-match_ends(df::DataFrame) :: DataFrame = mapcols(match_ends ∘ Array, df)
 """Linearly match ends of vector"""
 function match_ends(vec::Vector{<:Number})
     t = range(first(vec), stop=last(vec), length=length(vec))
     return vec .- t 
 end
 
+"""Adjust dataframe columns to have same start and end values"""
+match_ends(df::DataFrame) :: DataFrame = mapcols(match_ends ∘ Array, df)
+
 export mean_center, match_ends
 
 # Normalization options
+# ------------------------------------------------
 """Normalize a vector by its standard deviation"""
 std_norm(vec::Vector{<:Number}) :: Vector = vec ./ std(vec)
+
 """Normalize colums of a dataframe by their standard deviation"""
 std_norm(df::DataFrame) :: DataFrame = mapcols(std_norm ∘ Array, df)
 
 """Normalize a vector by its Euclidean norm"""
 quad_norm(vec::Vector{<:Number}) :: Vector = vec ./ norm(vec)
+
 """Normalize columns of dataframe by Euclidean norms"""
 quad_norm(df::DataFrame) :: DataFrame = mapcols(quad_norm ∘ Array, df)
 
 """Normalize a vector by its total variation norm"""
 totvar_norm(vec::Vector{<:Number}) :: Vector = vec ./ norm(cycdiff(vec))
+
 """Normalize columns of dataframe by total variation"""
 totvar_norm(df::DataFrame) :: DataFrame = mapcols(totvar_norm ∘ Array, df)
 
 export std_norm, quad_norm, totvar_norm
 
-# Differentiationg & Green's integral 
+# Differentiation & Green's integral
+# ------------------------------------------------
 """Cyclically differentiate a vector"""
 cycdiff(v::Vector{<:Number})::Vector = diff(vcat(v[end], v))
+
 """Compute areavalue between two vectors (makes assumptions)"""
 areaval(x::Vector{<:Number}, y::Vector{<:Number}) :: Number = (x⋅cycdiff(y) - y⋅cycdiff(x))/2
 
 export cycdiff, areaval
 
 # Loop to create lead matrix
+# ------------------------------------------------
+
 """Make a lead matrix from the columns of a dataframe"""
 make_lead_matrix(df::DataFrame) = make_lead_matrix(Matrix(df))
 
@@ -61,6 +73,8 @@ function make_lead_matrix(arr::Matrix{T}) where T
 end
 export make_lead_matrix
 
+# Structures to facilitate some typical data analysis routines
+# ------------------------------------------------
 struct Scan
 	name :: String
 	task :: String
