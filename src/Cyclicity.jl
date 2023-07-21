@@ -50,7 +50,12 @@ end
 """Cumulatively compute the parametric area between two time series"""
 function cumul_area(x::Vector{T}, y::Vector{T}) :: Vector{T} where T
 	@assert length(x) == length(y)
-	[areaval(x[1:i], y[1:i]) for i in eachindex(x)]
+	z = similar(x)
+	z[1] = 0
+	for n=2:length(z)
+		z[n] = z[n-1] + (x[1]-x[n])*(y[n-1]-y[n]) - (y[1]-y[n])*(x[n-1]-x[n])
+	end
+	return z/2
 end
 export cycdiff, areaval, cumul_area
 
