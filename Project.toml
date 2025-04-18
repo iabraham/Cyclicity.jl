@@ -1,7 +1,7 @@
 name = "Cyclicity"
 uuid = "a88761f6-b58b-4a4a-a8c2-5b1acaebac37"
 authors = ["Ivan Abraham"]
-version = "1.0.0-DEV"
+version = "1.1.0-DEV"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
@@ -11,11 +11,12 @@ StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [weakdeps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-Ellipses = "b9d4f3ba-3816-48fb-bf92-3f46c6368c52"
+Ellipses = "c9827e47-befa-4570-9de0-ee37d436178a"
 
 [extensions]
 CyDataExt = ["Ellipses", "CSV"]
 
 [compat]
-julia = "1"
+LinearAlgebra = "1.11.0"
+julia = "1.6.7"
 
