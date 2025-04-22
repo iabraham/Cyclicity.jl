@@ -1,5 +1,6 @@
 # Cyclicity
 
+[![Build Status](https://github.com/iabraham/Cyclicity.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/iabraham/Cyclicity.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
 Package to help implement Cyclicity Analysis[^1][^2][^3] in Julia for fMRI scans.  
 
