@@ -16,6 +16,9 @@ Ellipses = "c9827e47-befa-4570-9de0-ee37d436178a"
 [extensions]
 CyDataExt = ["Ellipses", "CSV"]
 
+[compat]
+DataStructures = "0.18"
+
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
